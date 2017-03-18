@@ -14,7 +14,8 @@
 		620C67961E74C09B0030806B /* foodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620C67951E74C09B0030806B /* foodCell.swift */; };
 		620C679C1E74D5340030806B /* foodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620C679B1E74D5340030806B /* foodItem.swift */; };
 		623B53811E785FF400DF1056 /* foodDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623B53801E785FF400DF1056 /* foodDetailViewController.swift */; };
-		623B53831E786E1600DF1056 /* foodInfoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623B53821E786E1600DF1056 /* foodInfoModel.swift */; };
+		62986C761E7B8C080037F338 /* apiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62986C751E7B8C080037F338 /* apiModel.swift */; };
+		62986C781E7B8D1E0037F338 /* recipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62986C771E7B8D1E0037F338 /* recipeModel.swift */; };
 		62B9BEAF1E759EA10064985C /* foodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B9BEAE1E759EA10064985C /* foodModel.swift */; };
 		62B9BEB11E75C8E00064985C /* foodItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B9BEB01E75C8E00064985C /* foodItemViewController.swift */; };
 		62B9BEB31E76712D0064985C /* customizeFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B9BEB21E76712D0064985C /* customizeFunc.swift */; };
@@ -33,7 +34,8 @@
 		620C67951E74C09B0030806B /* foodCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = foodCell.swift; sourceTree = "<group>"; };
 		620C679B1E74D5340030806B /* foodItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = foodItem.swift; sourceTree = "<group>"; };
 		623B53801E785FF400DF1056 /* foodDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = foodDetailViewController.swift; sourceTree = "<group>"; };
-		623B53821E786E1600DF1056 /* foodInfoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = foodInfoModel.swift; sourceTree = "<group>"; };
+		62986C751E7B8C080037F338 /* apiModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = apiModel.swift; sourceTree = "<group>"; };
+		62986C771E7B8D1E0037F338 /* recipeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = recipeModel.swift; sourceTree = "<group>"; };
 		62B9BEAE1E759EA10064985C /* foodModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = foodModel.swift; sourceTree = "<group>"; };
 		62B9BEB01E75C8E00064985C /* foodItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = foodItemViewController.swift; sourceTree = "<group>"; };
 		62B9BEB21E76712D0064985C /* customizeFunc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customizeFunc.swift; sourceTree = "<group>"; };
@@ -100,7 +102,8 @@
 				620C679B1E74D5340030806B /* foodItem.swift */,
 				62B9BEAE1E759EA10064985C /* foodModel.swift */,
 				62B9BEB21E76712D0064985C /* customizeFunc.swift */,
-				623B53821E786E1600DF1056 /* foodInfoModel.swift */,
+				62986C751E7B8C080037F338 /* apiModel.swift */,
+				62986C771E7B8D1E0037F338 /* recipeModel.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -198,13 +201,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				62CCF0EF1E777CC600E9B2FA /* loginViewController.swift in Sources */,
-				623B53831E786E1600DF1056 /* foodInfoModel.swift in Sources */,
 				620C67961E74C09B0030806B /* foodCell.swift in Sources */,
 				62B9BEB11E75C8E00064985C /* foodItemViewController.swift in Sources */,
 				62CCF0F51E782B3A00E9B2FA /* logo_display.swift in Sources */,
 				62B9BEAF1E759EA10064985C /* foodModel.swift in Sources */,
 				620C67821E74BD8A0030806B /* AppDelegate.swift in Sources */,
+				62986C761E7B8C080037F338 /* apiModel.swift in Sources */,
 				620C679C1E74D5340030806B /* foodItem.swift in Sources */,
+				62986C781E7B8D1E0037F338 /* recipeModel.swift in Sources */,
 				62B9BEB31E76712D0064985C /* customizeFunc.swift in Sources */,
 				623B53811E785FF400DF1056 /* foodDetailViewController.swift in Sources */,
 			);
