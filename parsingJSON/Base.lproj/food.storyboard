@@ -13,7 +13,7 @@
         <!--Reveal View Controller-->
         <scene sceneID="yJw-uK-lI5">
             <objects>
-                <viewController storyboardIdentifier="entranceFoodController" id="OLs-5W-E65" customClass="SWRevealViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="entranceFoodController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="OLs-5W-E65" customClass="SWRevealViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uSf-Nb-uKy"/>
                         <viewControllerLayoutGuide type="bottom" id="uLZ-4k-iyf"/>
@@ -26,6 +26,7 @@
                     <connections>
                         <segue destination="3Rr-CT-XgB" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="2gf-QJ-g9N"/>
                         <segue destination="Uo9-2k-o49" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="wRU-Bt-B4S"/>
+                        <segue destination="iPR-4J-9Xd" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="Hc7-Fs-0qu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PJ7-Fg-5YN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -35,7 +36,7 @@
         <!--Menu Controller-->
         <scene sceneID="E6v-l6-6oR">
             <objects>
-                <tableViewController id="3Rr-CT-XgB" customClass="MenuController" customModule="parsingJSON" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="menuBar" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3Rr-CT-XgB" customClass="MenuController" customModule="parsingJSON" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="tkU-1y-Xmk">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -309,7 +310,7 @@
                     </items>
                 </navigationBar>
             </objects>
-            <point key="canvasLocation" x="3383" y="-55"/>
+            <point key="canvasLocation" x="3402" y="-618"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="s0v-bJ-4pb">
@@ -345,10 +346,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D6h-mu-rbj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2604" y="-55"/>
+            <point key="canvasLocation" x="2575" y="-618"/>
         </scene>
     </scenes>
     <resources>
         <image name="menu" width="22" height="22"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Hc7-Fs-0qu"/>
+    </inferredMetricsTieBreakers>
 </document>

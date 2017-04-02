@@ -133,8 +133,14 @@ class loginViewController: UIViewController, UITextFieldDelegate {
                         let storyboard = UIStoryboard(name: "food", bundle: nil)
                         let controller = storyboard.instantiateViewController(withIdentifier: "foodItemViewController") as! foodItemViewController
                         let navController = UINavigationController(rootViewController: controller) // Creating a navigation controller with VC1 at the root of the navigation stack.
-                        self.present(navController, animated:true, completion: nil)
-                    }
+                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                        let menuView :MenuController = storyboard.instantiateViewController(withIdentifier: "menuBar") as! MenuController
+                        let revealController = SWRevealViewController()
+                        
+                        revealController.frontViewController = navController;
+                        revealController.rearViewController = menuView;
+                        
+                        appDelegate.window?.rootViewController = revealController                    }
                     else{
                         //Show alert here
                         self.showAlert(title: "User Does Not Exist", alertTitle: "Close", message: "");
@@ -151,9 +157,17 @@ class loginViewController: UIViewController, UITextFieldDelegate {
                     else{
                         //Show Food UITable
                         let storyboard = UIStoryboard(name: "food", bundle: nil)
-                        let controller = storyboard.instantiateViewController(withIdentifier: "entranceFoodController") 
+                        let controller = storyboard.instantiateViewController(withIdentifier: "entranceFoodController")
                         /*let navController = UINavigationController(rootViewController: controller) // Creating a navigation controller with VC1 at the root of the navigation stack.*/
-                        self.present(controller, animated:true, completion: nil)
+                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                        
+                        let menuView :MenuController = storyboard.instantiateViewController(withIdentifier: "menuBar") as! MenuController
+                        let revealController = SWRevealViewController()
+                        
+                        revealController.frontViewController = controller;
+                        revealController.rearViewController = menuView;
+                        
+                        appDelegate.window?.rootViewController = revealController
                     }
 
                 });

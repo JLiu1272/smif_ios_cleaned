@@ -8,7 +8,7 @@
 
 import UIKit
 
-class foodDetailViewController: UIViewController, apiModelProtocal, fullRecipeAPIModelProtocal {
+class foodDetailViewController: UIViewController, apiModelProtocal, fullRecipeAPIModelProtocal, foodInfoAPIModelProtocal {
 
     @IBOutlet weak var thumbnail_image: UIImageView!
     //@IBOutlet weak var food_detail: UITextView!
@@ -17,11 +17,15 @@ class foodDetailViewController: UIViewController, apiModelProtocal, fullRecipeAP
     @IBOutlet weak var menuButton: UIBarButtonItem!
     var jsonResponseFood: NSArray = NSArray() //API for types of food available
     var jsonResponseRecipe: NSArray = NSArray() // API for recipes in food
+    var jsonResponseNutrient: NSArray = NSArray() //API for nutrients in food
     var selectedFood: foodItem?
     var postStr: String?
     
-    //Initializing API
+    //Initializing API for recipe
     let FullRecipeAPIModel = fullRecipeAPIModel()
+    
+    //Initializing API for Nutritious fact about food
+    let FoodInfoAPIModel = foodInfoAPIModle()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +45,7 @@ class foodDetailViewController: UIViewController, apiModelProtocal, fullRecipeAP
         
         APIModel.delegate = self
         FullRecipeAPIModel.delegate = self
+        FoodInfoAPIModel.delegate = self
         APIModel.downloadItems(postString: postStr!)
     
         // Do any additional setup after loading the view.
@@ -49,6 +54,14 @@ class foodDetailViewController: UIViewController, apiModelProtocal, fullRecipeAP
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    /*
+     * Model: apiModelProtocal
+     */
+    func itemsDownloadedNutrient(items: NSArray){
+        jsonResponseNutrient = items
+        print(jsonResponseNutrient)
     }
     
     /*

@@ -96,7 +96,7 @@ class foodInfoAPIModle: NSObject {
         }
         
         DispatchQueue.main.async(execute: {
-            self.delegate.itemsDownloadedRecipe(items: recipes)
+            self.delegate.itemsDownloadedNutrient(items: recipes)
         });
     }
     
