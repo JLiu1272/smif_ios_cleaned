@@ -14,6 +14,12 @@
 		620C67961E74C09B0030806B /* foodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620C67951E74C09B0030806B /* foodCell.swift */; };
 		620C679C1E74D5340030806B /* foodItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 620C679B1E74D5340030806B /* foodItem.swift */; };
 		623B53811E785FF400DF1056 /* foodDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 623B53801E785FF400DF1056 /* foodDetailViewController.swift */; };
+		62563BEE1E8CB52100D1E055 /* fullRecipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62563BED1E8CB52100D1E055 /* fullRecipeModel.swift */; };
+		62563BF01E8D485800D1E055 /* fullRecipeAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62563BEF1E8D485800D1E055 /* fullRecipeAPIModel.swift */; };
+		62563C2D1E9037FA00D1E055 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62563C2C1E9037FA00D1E055 /* SWRevealViewController.m */; };
+		62563C331E904F1E00D1E055 /* menuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62563C321E904F1E00D1E055 /* menuController.swift */; };
+		62563C351E90A5E600D1E055 /* foodInfoAPIModle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62563C341E90A5E600D1E055 /* foodInfoAPIModle.swift */; };
+		62563C371E90A70E00D1E055 /* foodInfoM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62563C361E90A70E00D1E055 /* foodInfoM.swift */; };
 		62986C761E7B8C080037F338 /* apiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62986C751E7B8C080037F338 /* apiModel.swift */; };
 		62986C781E7B8D1E0037F338 /* recipeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62986C771E7B8D1E0037F338 /* recipeModel.swift */; };
 		62B9BEAF1E759EA10064985C /* foodModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62B9BEAE1E759EA10064985C /* foodModel.swift */; };
@@ -34,6 +40,14 @@
 		620C67951E74C09B0030806B /* foodCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = foodCell.swift; sourceTree = "<group>"; };
 		620C679B1E74D5340030806B /* foodItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = foodItem.swift; sourceTree = "<group>"; };
 		623B53801E785FF400DF1056 /* foodDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = foodDetailViewController.swift; sourceTree = "<group>"; };
+		62563BED1E8CB52100D1E055 /* fullRecipeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fullRecipeModel.swift; sourceTree = "<group>"; };
+		62563BEF1E8D485800D1E055 /* fullRecipeAPIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = fullRecipeAPIModel.swift; sourceTree = "<group>"; };
+		62563C2A1E9037F900D1E055 /* parsingJSON-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "parsingJSON-Bridging-Header.h"; sourceTree = "<group>"; };
+		62563C2B1E9037FA00D1E055 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWRevealViewController.h; path = "../../../../Downloads/SWRevealViewController-master/SWRevealViewController/SWRevealViewController.h"; sourceTree = "<group>"; };
+		62563C2C1E9037FA00D1E055 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWRevealViewController.m; path = "../../../../Downloads/SWRevealViewController-master/SWRevealViewController/SWRevealViewController.m"; sourceTree = "<group>"; };
+		62563C321E904F1E00D1E055 /* menuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = menuController.swift; sourceTree = "<group>"; };
+		62563C341E90A5E600D1E055 /* foodInfoAPIModle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = foodInfoAPIModle.swift; sourceTree = "<group>"; };
+		62563C361E90A70E00D1E055 /* foodInfoM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = foodInfoM.swift; sourceTree = "<group>"; };
 		62986C751E7B8C080037F338 /* apiModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = apiModel.swift; sourceTree = "<group>"; };
 		62986C771E7B8D1E0037F338 /* recipeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = recipeModel.swift; sourceTree = "<group>"; };
 		62B9BEAE1E759EA10064985C /* foodModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = foodModel.swift; sourceTree = "<group>"; };
@@ -74,6 +88,7 @@
 		620C67801E74BD8A0030806B /* parsingJSON */ = {
 			isa = PBXGroup;
 			children = (
+				62563C261E9037A800D1E055 /* SWRevealViewController */,
 				62CCF0F01E777CD300E9B2FA /* storyboard */,
 				620C67981E74C0A70030806B /* Model */,
 				620C67971E74C0A10030806B /* View */,
@@ -104,8 +119,23 @@
 				62B9BEB21E76712D0064985C /* customizeFunc.swift */,
 				62986C751E7B8C080037F338 /* apiModel.swift */,
 				62986C771E7B8D1E0037F338 /* recipeModel.swift */,
+				62563BED1E8CB52100D1E055 /* fullRecipeModel.swift */,
+				62563BEF1E8D485800D1E055 /* fullRecipeAPIModel.swift */,
+				62563C321E904F1E00D1E055 /* menuController.swift */,
+				62563C341E90A5E600D1E055 /* foodInfoAPIModle.swift */,
+				62563C361E90A70E00D1E055 /* foodInfoM.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		62563C261E9037A800D1E055 /* SWRevealViewController */ = {
+			isa = PBXGroup;
+			children = (
+				62563C2B1E9037FA00D1E055 /* SWRevealViewController.h */,
+				62563C2C1E9037FA00D1E055 /* SWRevealViewController.m */,
+				62563C2A1E9037F900D1E055 /* parsingJSON-Bridging-Header.h */,
+			);
+			name = SWRevealViewController;
 			sourceTree = "<group>";
 		};
 		62CCF0F01E777CD300E9B2FA /* storyboard */ = {
@@ -159,6 +189,7 @@
 					620C677D1E74BD8A0030806B = {
 						CreatedOnToolsVersion = 8.2.1;
 						DevelopmentTeam = VWX7LL8FBV;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -200,6 +231,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62563C351E90A5E600D1E055 /* foodInfoAPIModle.swift in Sources */,
+				62563C371E90A70E00D1E055 /* foodInfoM.swift in Sources */,
 				62CCF0EF1E777CC600E9B2FA /* loginViewController.swift in Sources */,
 				620C67961E74C09B0030806B /* foodCell.swift in Sources */,
 				62B9BEB11E75C8E00064985C /* foodItemViewController.swift in Sources */,
@@ -207,7 +240,11 @@
 				62B9BEAF1E759EA10064985C /* foodModel.swift in Sources */,
 				620C67821E74BD8A0030806B /* AppDelegate.swift in Sources */,
 				62986C761E7B8C080037F338 /* apiModel.swift in Sources */,
+				62563C2D1E9037FA00D1E055 /* SWRevealViewController.m in Sources */,
 				620C679C1E74D5340030806B /* foodItem.swift in Sources */,
+				62563BEE1E8CB52100D1E055 /* fullRecipeModel.swift in Sources */,
+				62563C331E904F1E00D1E055 /* menuController.swift in Sources */,
+				62563BF01E8D485800D1E055 /* fullRecipeAPIModel.swift in Sources */,
 				62986C781E7B8D1E0037F338 /* recipeModel.swift in Sources */,
 				62B9BEB31E76712D0064985C /* customizeFunc.swift in Sources */,
 				623B53811E785FF400DF1056 /* foodDetailViewController.swift in Sources */,
@@ -331,11 +368,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = VWX7LL8FBV;
 				INFOPLIST_FILE = parsingJSON/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = JL.Enterprise.parsingJSON;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "parsingJSON/parsingJSON-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -344,11 +384,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				DEVELOPMENT_TEAM = VWX7LL8FBV;
 				INFOPLIST_FILE = parsingJSON/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = JL.Enterprise.parsingJSON;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "parsingJSON/parsingJSON-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

@@ -8,25 +8,41 @@
 
 import UIKit
 
-class foodDetailViewController: UIViewController, foodInfoProtocal {
+class foodDetailViewController: UIViewController, apiModelProtocal, fullRecipeAPIModelProtocal {
 
     @IBOutlet weak var thumbnail_image: UIImageView!
-    @IBOutlet weak var food_detail: UITextView!
+    //@IBOutlet weak var food_detail: UITextView!
     @IBOutlet weak var testing: UILabel!
     
-    var feedItems: NSArray = NSArray()
-    
+    @IBOutlet weak var menuButton: UIBarButtonItem!
+    var jsonResponseFood: NSArray = NSArray() //API for types of food available
+    var jsonResponseRecipe: NSArray = NSArray() // API for recipes in food
     var selectedFood: foodItem?
+    var postStr: String?
+    
+    //Initializing API
+    let FullRecipeAPIModel = fullRecipeAPIModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(selectedFood?.name as String!)
-        testing.text = self.selectedFood?.name
         
-        let FoodInfoModel = foodInfoModel()
-        FoodInfoModel.delegate = self
-        FoodInfoModel.downloadItems()
+        //Creating the slidebar Navigation using SWRevealViewController 
+        if self.revealViewController() != nil {
+            menuButton.target = self.revealViewController()
+            menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
 
+
+        print(selectedFood?.name as String!)
+        //testing.text = self.selectedFood?.name
+        
+        let APIModel = apiModel()
+        
+        APIModel.delegate = self
+        FullRecipeAPIModel.delegate = self
+        APIModel.downloadItems(postString: postStr!)
+    
         // Do any additional setup after loading the view.
     }
 
@@ -35,10 +51,63 @@ class foodDetailViewController: UIViewController, foodInfoProtocal {
         // Dispose of any resources that can be recreated.
     }
     
-    func itemsDownloaded(items: NSArray){
-        feedItems = items
-        print(feedItems)
+    /*
+     * Model: apiModelProtocal
+     */
+    func itemsDownloadedFood(items: NSArray){
+        jsonResponseFood = items
+        self.FullRecipeAPIModel.downloadItems(id: (jsonResponseFood[0] as! recipeModel).getId())
+        print((jsonResponseFood[0] as! recipeModel).getTitle())
+        let image = (jsonResponseFood[0] as! recipeModel).getImage()
+        convertToImage(base64: image)
+        //print(image)
     }
+    
+    /*
+     * Converting base64 String into image 
+     */
+    func convertToImage(base64: String){
+        let catPictureURL = URL(string: base64)!
+        
+        // Creating a session object with the default configuration.
+        // You can read more about it here https://developer.apple.com/reference/foundation/urlsessionconfiguration
+        let session = URLSession(configuration: .default)
+        
+        // Define a download task. The download task will download the contents of the URL as a Data object and then you can do what you wish with that data.
+        let downloadPicTask = session.dataTask(with: catPictureURL) { (data, response, error) in
+            // The download has finished.
+            if let e = error {
+                print("Error downloading cat picture: \(e)")
+            } else {
+                // No errors found.
+                // It would be weird if we didn't have a response, so check for that too.
+                if let res = response as? HTTPURLResponse {
+                    print("Downloaded cat picture with response code \(res.statusCode)")
+                    if let imageData = data {
+                        // Finally convert that Data into an image and do what you wish with it.
+                        let image = UIImage(data: imageData)
+                        self.thumbnail_image.image = image
+                        // Do something with your image.
+                    } else {
+                        print("Couldn't get image: Image is nil")
+                    }
+                } else {
+                    print("Couldn't get response code for some reason")
+                }
+            }
+        }
+        downloadPicTask.resume()
+        
+    }
+    
+    /*
+     * Model: fullRecipeAPIModelProtocal - Function for storing the returned value
+     */
+    func itemsDownloadedRecipe(items: NSArray){
+        jsonResponseRecipe = items
+        //print(jsonResponseRecipe)
+    }
+    
 
     /*
     // MARK: - Navigation

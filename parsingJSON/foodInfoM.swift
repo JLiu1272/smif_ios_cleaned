@@ -1,23 +1,23 @@
 //
-//  recipeModel.swift
+//  foodInfoM.swift
 //  parsingJSON
 //
-//  Created by Jennifer liu on 16/3/2017.
+//  Created by Jennifer liu on 1/4/2017.
 //  Copyright © 2017 Jennifer liu. All rights reserved.
 //
 
 import UIKit
 
-class recipeModel: NSObject {
-    // REMINDER: Temporary removed images due to complication with byte
-    // encoding
+class foodInfoM: NSObject {
     
     //properties
     var id: Int?
-    var title: String?
+    var name: String?
+    var aisle: String?
     var image: String?
-    var usedIngredientCount: Int?
-    var missedIngredientCount: Int?
+    var amount: String?
+    var unit: String?
+    var nutrition:[]
     //var image: UIImage?
     
     //Empty Constructor
@@ -41,22 +41,5 @@ class recipeModel: NSObject {
     override var description: String{
         return "Id: \(String(describing: id)), Title: \(String(describing: title)), Image: \(String(describing: image)), Used Ingredient Count: \(String(describing: usedIngredientCount)), Missed Ingredient Count: \(String(describing: missedIngredientCount))"
     }
-    
-    //Return title
-    func getTitle() -> String{
-        return self.title!
-    }
-    
-    //Return image
-    func getImage() -> String{
-        return self.image!
-    }
-    
-    
-    //Return id
-    func getId() -> String{
-        return String(self.id!)
-    }
-    
-    
+
 }

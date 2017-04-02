@@ -38,15 +38,15 @@ class foodModel: NSObject, URLSessionDataDelegate {
             
             //exiting if there is some error
             if error != nil{
-                print("error is \(error)")
+                print("error is \(String(describing: error))")
                 return;
             }else{
                 print("Data downloaded")
                 
                 // DEBUGGING: Use for Debugging, prints out what data is
-                /*print("response = \(response!)")
+                print("response = \(response!)")
                 let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!
-                print("responseString = \(responseString)")*/
+                print("responseString = \(responseString)")
                 
                 self.parseJSON(data: data!)
             }
@@ -61,7 +61,12 @@ class foodModel: NSObject, URLSessionDataDelegate {
     func parseJSON(data: Data) {
         
         var jsonResult: NSArray = NSArray()
-        jsonResult = try! JSONSerialization.jsonObject(with: data, options: []) as! NSArray
+        do{
+            jsonResult = try JSONSerialization.jsonObject(with: data, options: []) as! NSArray
+        } catch {
+            //If food item list is empty, go into here
+            print("Food Item list is empty")
+        }
         
         
         var jsonElement: NSDictionary = NSDictionary()

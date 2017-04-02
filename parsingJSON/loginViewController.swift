@@ -112,7 +112,7 @@ class loginViewController: UIViewController, UITextFieldDelegate {
             
             //exiting if there is some error
             if error != nil{
-                print("error is \(error)")
+                print("error is \(String(describing: error))")
                 return;
             }
             
@@ -134,7 +134,6 @@ class loginViewController: UIViewController, UITextFieldDelegate {
                         let controller = storyboard.instantiateViewController(withIdentifier: "foodItemViewController") as! foodItemViewController
                         let navController = UINavigationController(rootViewController: controller) // Creating a navigation controller with VC1 at the root of the navigation stack.
                         self.present(navController, animated:true, completion: nil)
-                        //self.present(controller, animated: true, completion: nil)
                     }
                     else{
                         //Show alert here
@@ -143,12 +142,21 @@ class loginViewController: UIViewController, UITextFieldDelegate {
                 });
             }
             else{
-                if(responseString == "duplicate"){
-                    DispatchQueue.main.async(execute: {
+                //CODE COULD BE SIMPLIFIED
+                DispatchQueue.main.async(execute: {
+                    if(responseString == "duplicate"){
                         //Show alert here
                         self.showAlert(title: "User with this email already exist", alertTitle: "Close", message: "Please register with another email address")
-                    });
-                }
+                    }
+                    else{
+                        //Show Food UITable
+                        let storyboard = UIStoryboard(name: "food", bundle: nil)
+                        let controller = storyboard.instantiateViewController(withIdentifier: "entranceFoodController") 
+                        /*let navController = UINavigationController(rootViewController: controller) // Creating a navigation controller with VC1 at the root of the navigation stack.*/
+                        self.present(controller, animated:true, completion: nil)
+                    }
+
+                });
             }
             
         }
@@ -199,7 +207,7 @@ class loginViewController: UIViewController, UITextFieldDelegate {
         // MARK: Setting Round Corner for Logo Backdrop
         
         //Add arc to my logo backdrop
-        let logoBgd = UIBezierPath.init(arcCenter: CGPoint(x: logo_backdrop.bounds.size.width / 2, y:0), radius: logo_backdrop.bounds.size.height, startAngle: 0.0, endAngle: CGFloat(M_PI), clockwise: true)
+        let logoBgd = UIBezierPath.init(arcCenter: CGPoint(x: logo_backdrop.bounds.size.width / 2, y:0), radius: logo_backdrop.bounds.size.height, startAngle: 0.0, endAngle: CGFloat(Double.pi), clockwise: true)
 
         
         let shape1 = CAShapeLayer()

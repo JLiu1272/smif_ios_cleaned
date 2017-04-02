@@ -1,35 +1,34 @@
 //
-//  apiModel.swift
+//  foodInfoAPIModle.swift
 //  parsingJSON
 //
-//  Created by Jennifer liu on 16/3/2017.
+//  Created by Jennifer liu on 1/4/2017.
 //  Copyright © 2017 Jennifer liu. All rights reserved.
 //
 
 import UIKit
 
-protocol apiModelProtocal: class {
-    func itemsDownloadedFood(items: NSArray)
+protocol foodInfoAPIModelProtocal: class {
+    func itemsDownloadedNutrient(items: NSArray)
 }
 
-class apiModel: NSObject, URLSessionDataDelegate{
+class foodInfoAPIModle: NSObject {
     
     //properties
     
-    weak var delegate: apiModelProtocal!
+    weak var delegate: foodInfoAPIModelProtocal!
     
     var data : NSMutableData = NSMutableData()
     
-    // postString - the ingredients in your fridge 
-    // type - Whether you are trying to generate what type of food you can make 
-    //        or making an entire recipe card out of it
-    //        Options
-    //          -getFoodTitle, makeRecipe
-    func downloadItems(postString: String) {
+    // Param
+    //    -id
+    //    -amount (Optional)
+    //    -unit   (Optional)
+    func downloadItems(id: String) {
         
         // Set up the URL request
         let mashape: String = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com"
-        let todoEndpoint: String = "\(mashape)/recipes/findByIngredients\(postString)"
+        let todoEndpoint = "\(mashape)/food/ingredients/\(id)/information"
         
         guard let url = URL(string: todoEndpoint) else {
             print("Error: cannot create URL")
@@ -47,14 +46,14 @@ class apiModel: NSObject, URLSessionDataDelegate{
                 print("error \(String(describing: error))")
                 return;
             }else{
-                //print("Data downloaded")
+                print("Data downloaded")
                 
                 // DEBUGGING: Use for Debugging, prints out what data is
                 /*print("response = \(response!)")
                  let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!
                  print("responseString = \(responseString)")*/
                 
-                self.parseJSONFood(data: data!)
+                self.parseJSONRecipe(data: data!)
             }
             
         }
@@ -63,12 +62,10 @@ class apiModel: NSObject, URLSessionDataDelegate{
         task.resume()
     }
     
-    
     /*
-     * Parsing API Data - For getting the food type we are trying
+     * Parsing API Data - For getting the entire recipe
      */
-    func parseJSONFood(data: Data) {
-        
+    func parseJSONRecipe(data: Data) {
         var jsonResult: NSArray = NSArray()
         jsonResult = try! JSONSerialization.jsonObject(with: data, options: []) as! NSArray
         
@@ -83,21 +80,15 @@ class apiModel: NSObject, URLSessionDataDelegate{
             
             jsonElement = jsonResult[i] as! NSDictionary
             
-            let recipe:recipeModel = recipeModel()
+            let recipe:fullRecipeModel = fullRecipeModel()
             
             //the following insures none of the JsonElement values are nil through optional binding
-            if let id = jsonElement["id"] as? Int,
-                let title = jsonElement["title"] as? String,
-                let image = jsonElement["image"] as? String,
-                let usedIngredientCount = jsonElement["usedIngredientCount"] as? Int,
-                let missedIngredientCount = jsonElement["missedIngredientCount"] as? Int
+            if let name = jsonElement["name"] as? String,
+                let steps = jsonElement["steps"] as? [[String: Any]]
             {
-                recipe.id = id
-                recipe.title = title
-                recipe.image = image
-                recipe.usedIngredientCount = usedIngredientCount
-                recipe.missedIngredientCount = missedIngredientCount
-
+                recipe.name = name
+                recipe.steps = steps
+                
             }
             //print(recipe)
             recipes.add(recipe)
@@ -105,9 +96,10 @@ class apiModel: NSObject, URLSessionDataDelegate{
         }
         
         DispatchQueue.main.async(execute: {
-            self.delegate.itemsDownloadedFood(items: recipes)
+            self.delegate.itemsDownloadedRecipe(items: recipes)
         });
     }
+    
+
 
 }
-

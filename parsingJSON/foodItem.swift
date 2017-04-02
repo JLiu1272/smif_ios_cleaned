@@ -40,7 +40,14 @@ class foodItem: NSObject, URLSessionDataDelegate {
     
     //print object's current state 
     override var description: String{
-        return "Name: \(name), status: \(status), Count: \(count), Date In: \(date_in), Date Left: \(date_left)"
+        return "Name: \(String(describing: name)), status: \(String(describing: status)), Count: \(String(describing: count)), Date In: \(String(describing: date_in)), Date Left: \(String(describing: date_left))"
+    }
+    
+    /*
+     * Get name of food item
+     */
+    func getName() -> String{
+        return self.name!
     }
 
 }

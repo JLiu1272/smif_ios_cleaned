@@ -13,7 +13,11 @@ class foodItemViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var listTableView: UITableView!
     var detailViewController: foodDetailViewController? = nil
     var feedItems: NSArray = NSArray()
+    @IBOutlet weak var menu: UIBarButtonItem!
     var selectedFood: foodItem = foodItem()
+    
+    //Returns the list of all the names
+    var allNames: String = ""
     
     var filteredFood = [foodItem]()
     var searchController = UISearchController()
@@ -21,6 +25,13 @@ class foodItemViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Creating the slidebar Navigation using SWRevealViewController
+        if self.revealViewController() != nil {
+            menu.target = self.revealViewController()
+            menu.action = #selector(SWRevealViewController.revealToggle(_:))
+            self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+        }
+
         //set delegates and initialize foodModel
         self.listTableView.delegate = self
         self.listTableView.dataSource = self
@@ -56,6 +67,32 @@ class foodItemViewController: UIViewController, UITableViewDelegate, UITableView
         self.present(controller, animated: true, completion: nil)
     }
     
+    /*
+     * Get name of all the food available in fridge 
+     */
+    func getAllNames() -> String {
+        
+        let fillIngredients = "findByIngredients=false"
+        var ingredients = "ingredients="
+        let limitLicense = "limitLicense=false"
+        let number = "number=5"
+        let ranking = "ranking=1"
+        var postString = ""
+        
+        for i in 0...(feedItems.count-1)
+        {
+            let name = (feedItems[i] as! foodItem).name!
+            if( i != feedItems.count){
+                ingredients +=  "\(name)%2C"
+            }
+        }
+        postString += "?\(fillIngredients)&\(ingredients)&\(limitLicense)&\(number)&\(ranking)"
+        //print(postString)
+        return postString
+        
+    }
+    
+    
     
     /*
      * Converting NSDate to String
@@ -71,14 +108,16 @@ class foodItemViewController: UIViewController, UITableViewDelegate, UITableView
     
     func itemsDownloaded(items: NSArray){
         feedItems = items
-        listTableView.reloadData()
+        if(feedItems.count > 0){
+            listTableView.reloadData();
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchController.isActive && searchController.searchBar.text != "" {
             return filteredFood.count
         }
-        //Return the number of feed items 
+        //Return the number of feed items
         return feedItems.count
     }
     
@@ -132,10 +171,15 @@ class foodItemViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func prepare(for segue: UIStoryboardSegue?, sender: Any?) {
         // Get reference to the destination view controller
-        let detailVC  = segue!.destination as! foodDetailViewController
+        
+        let nav = segue!.destination as! UINavigationController
+        let detailVC  = nav.topViewController as! foodDetailViewController
+        
         // Set the property to the selected location so when the view for
         // detail view controller loads, it can access that property to get the feeditem obj
         //print(selectedFood as foodItem) DEGBUGGING
+
+        detailVC.postStr = self.getAllNames()
         detailVC.selectedFood = self.selectedFood
     }
 
