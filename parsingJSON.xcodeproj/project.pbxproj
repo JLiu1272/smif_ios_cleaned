@@ -28,6 +28,9 @@
 		62CCF0EF1E777CC600E9B2FA /* loginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CCF0EE1E777CC600E9B2FA /* loginViewController.swift */; };
 		62CCF0F21E777CE600E9B2FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 62CCF0F11E777CE600E9B2FA /* Main.storyboard */; };
 		62CCF0F51E782B3A00E9B2FA /* logo_display.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62CCF0F41E782B3A00E9B2FA /* logo_display.swift */; };
+		62FA28F41EA8E61900C7CAAE /* imagesAPIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FA28F31EA8E61900C7CAAE /* imagesAPIModel.swift */; };
+		62FA28F61EA8FEA700C7CAAE /* imagesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FA28F51EA8FEA700C7CAAE /* imagesModel.swift */; };
+		62FA28F81EAAF66F00C7CAAE /* recipeListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62FA28F71EAAF66F00C7CAAE /* recipeListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +59,9 @@
 		62CCF0EE1E777CC600E9B2FA /* loginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = loginViewController.swift; sourceTree = "<group>"; };
 		62CCF0F11E777CE600E9B2FA /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		62CCF0F41E782B3A00E9B2FA /* logo_display.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = logo_display.swift; sourceTree = "<group>"; };
+		62FA28F31EA8E61900C7CAAE /* imagesAPIModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = imagesAPIModel.swift; sourceTree = "<group>"; };
+		62FA28F51EA8FEA700C7CAAE /* imagesModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = imagesModel.swift; sourceTree = "<group>"; };
+		62FA28F71EAAF66F00C7CAAE /* recipeListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = recipeListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +113,7 @@
 				62B9BEB01E75C8E00064985C /* foodItemViewController.swift */,
 				62CCF0EE1E777CC600E9B2FA /* loginViewController.swift */,
 				623B53801E785FF400DF1056 /* foodDetailViewController.swift */,
+				62FA28F71EAAF66F00C7CAAE /* recipeListViewController.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -124,6 +131,8 @@
 				62563C321E904F1E00D1E055 /* menuController.swift */,
 				62563C341E90A5E600D1E055 /* foodInfoAPIModle.swift */,
 				62563C361E90A70E00D1E055 /* foodInfoM.swift */,
+				62FA28F31EA8E61900C7CAAE /* imagesAPIModel.swift */,
+				62FA28F51EA8FEA700C7CAAE /* imagesModel.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -237,17 +246,20 @@
 				620C67961E74C09B0030806B /* foodCell.swift in Sources */,
 				62B9BEB11E75C8E00064985C /* foodItemViewController.swift in Sources */,
 				62CCF0F51E782B3A00E9B2FA /* logo_display.swift in Sources */,
+				62FA28F41EA8E61900C7CAAE /* imagesAPIModel.swift in Sources */,
 				62B9BEAF1E759EA10064985C /* foodModel.swift in Sources */,
 				620C67821E74BD8A0030806B /* AppDelegate.swift in Sources */,
 				62986C761E7B8C080037F338 /* apiModel.swift in Sources */,
 				62563C2D1E9037FA00D1E055 /* SWRevealViewController.m in Sources */,
 				620C679C1E74D5340030806B /* foodItem.swift in Sources */,
+				62FA28F81EAAF66F00C7CAAE /* recipeListViewController.swift in Sources */,
 				62563BEE1E8CB52100D1E055 /* fullRecipeModel.swift in Sources */,
 				62563C331E904F1E00D1E055 /* menuController.swift in Sources */,
 				62563BF01E8D485800D1E055 /* fullRecipeAPIModel.swift in Sources */,
 				62986C781E7B8D1E0037F338 /* recipeModel.swift in Sources */,
 				62B9BEB31E76712D0064985C /* customizeFunc.swift in Sources */,
 				623B53811E785FF400DF1056 /* foodDetailViewController.swift in Sources */,
+				62FA28F61EA8FEA700C7CAAE /* imagesModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

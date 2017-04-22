@@ -131,14 +131,18 @@ class loginViewController: UIViewController, UITextFieldDelegate {
                 DispatchQueue.main.async(execute: {
                     if self.checkLogin(data: responseString!) == true {
                         let storyboard = UIStoryboard(name: "food", bundle: nil)
-                        let controller = storyboard.instantiateViewController(withIdentifier: "foodItemViewController") as! foodItemViewController
-                        let navController = UINavigationController(rootViewController: controller) // Creating a navigation controller with VC1 at the root of the navigation stack.
+                        
+                        //Instantiating foodItemViewController with Navigation
+                        let controllerTable = storyboard.instantiateViewController(withIdentifier: "foodItemViewController") as! foodItemViewController
+                        let navControllerTable = UINavigationController(rootViewController: controllerTable) // Creating a navigation controller with VC1 at the root of the navigation stack.
+                        
                         let appDelegate = UIApplication.shared.delegate as! AppDelegate
                         let menuView :MenuController = storyboard.instantiateViewController(withIdentifier: "menuBar") as! MenuController
                         let revealController = SWRevealViewController()
                         
-                        revealController.frontViewController = navController;
+                        revealController.frontViewController = navControllerTable;
                         revealController.rearViewController = menuView;
+                        
                         
                         appDelegate.window?.rootViewController = revealController                    }
                     else{
@@ -160,6 +164,8 @@ class loginViewController: UIViewController, UITextFieldDelegate {
                         let controller = storyboard.instantiateViewController(withIdentifier: "entranceFoodController")
                         /*let navController = UINavigationController(rootViewController: controller) // Creating a navigation controller with VC1 at the root of the navigation stack.*/
                         let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                        
+                        
                         
                         let menuView :MenuController = storyboard.instantiateViewController(withIdentifier: "menuBar") as! MenuController
                         let revealController = SWRevealViewController()

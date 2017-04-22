@@ -11,13 +11,14 @@ import UIKit
 class foodInfoM: NSObject {
     
     //properties
-    var id: Int?
-    var name: String?
-    var aisle: String?
-    var image: String?
-    var amount: String?
-    var unit: String?
-    var nutrition:[String: Any]?
+    var brand_name: String!
+    var item_id: String!
+    var item_name: String!
+    var nf_calories: Int!
+    var nf_serving_size_qty: Int!
+    var nf_serving_size_unit: String!
+    var nf_total_fat: Int!
+    
     //var image: UIImage?
     
     //Empty Constructor
@@ -25,22 +26,20 @@ class foodInfoM: NSObject {
         
     }
     
-    init(id: Int, name: String, aisle: String?, image: String, amount: String, unit: String, nutrition: [String: Any])
+    init(brand_name: String, item_id:String, item_name:String, nf_calories: Int, nf_serving_size_qty: Int, nf_serving_size_unit: String, nf_total_fat: Int)
     {
-        
-        self.id = id
-        self.name = name
-        self.image = image
-        self.aisle = aisle
-        self.amount = amount
-        self.unit = unit
-        self.nutrition = nutrition
-        //self.image = image
+        self.brand_name = brand_name
+        self.item_id = item_id
+        self.item_name = item_name
+        self.nf_calories = nf_calories
+        self.nf_serving_size_qty = nf_serving_size_qty
+        self.nf_serving_size_unit = nf_serving_size_unit
+        self.nf_total_fat = nf_total_fat
     }
     
     //print object's current state
     override var description: String{
-        return "Id: \(String(describing: id)), Name: \(String(describing: name)), Image: \(String(describing: image)), Aisle: \(String(describing: aisle)), Amount: \(String(describing: amount)), Unit: \(String(describing: unit)), Nutrition: \(String(describing: nutrition))"
+        return "Brand Name: \(String(describing: self.brand_name)), Item Id: \(String(describing: self.item_id)), Calories: \(String(describing: self.nf_calories)), Serving Size Qty: \(String(describing: self.nf_serving_size_qty)), Serving Size Unit: \(String(describing: self.nf_serving_size_unit)), Total Fat: \(String(describing: self.nf_total_fat))"
     }
 
 }

@@ -47,7 +47,7 @@ class apiModel: NSObject, URLSessionDataDelegate{
                 print("error \(String(describing: error))")
                 return;
             }else{
-                //print("Data downloaded")
+                print("Data downloaded API")
                 
                 // DEBUGGING: Use for Debugging, prints out what data is
                 /*print("response = \(response!)")
@@ -104,7 +104,7 @@ class apiModel: NSObject, URLSessionDataDelegate{
             
         }
         
-        DispatchQueue.main.async(execute: {
+        DispatchQueue.global(qos: .utility).async(execute: {
             self.delegate.itemsDownloadedFood(items: recipes)
         });
     }

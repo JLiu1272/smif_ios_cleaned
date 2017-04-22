@@ -8,24 +8,37 @@
 
 import UIKit
 
-class foodDetailViewController: UIViewController, apiModelProtocal, fullRecipeAPIModelProtocal, foodInfoAPIModelProtocal {
+class foodDetailViewController: UIViewController, foodInfoAPIModelProtocal, apiModelProtocal, fullRecipeAPIModelProtocal, imagesAPIModelProtocal{
 
     @IBOutlet weak var thumbnail_image: UIImageView!
     //@IBOutlet weak var food_detail: UITextView!
-    @IBOutlet weak var testing: UILabel!
+    @IBOutlet weak var foodTitle: UILabel!
+    @IBOutlet weak var nutritionFacts: UITextView!
+    
+    
+    //Displaying Recipes
+    //@IBOutlet weak var recipes: UITextView!
+    
     
     @IBOutlet weak var menuButton: UIBarButtonItem!
     var jsonResponseFood: NSArray = NSArray() //API for types of food available
-    var jsonResponseRecipe: NSArray = NSArray() // API for recipes in food
+    var jsonResponseRecipe: NSMutableArray = NSMutableArray() // API for recipes in food
     var jsonResponseNutrient: NSArray = NSArray() //API for nutrients in food
-    var selectedFood: foodItem?
+    var jsonResponseImages: NSArray = NSArray() //API for grabbing images
+    var selectedFood: foodItem!
     var postStr: String?
+    
+    
+    
     
     //Initializing API for recipe
     let FullRecipeAPIModel = fullRecipeAPIModel()
     
     //Initializing API for Nutritious fact about food
     let FoodInfoAPIModel = foodInfoAPIModle()
+    
+    //Initializing API for images 
+    let ImagesAPIModel = imagesAPIModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,19 +49,28 @@ class foodDetailViewController: UIViewController, apiModelProtocal, fullRecipeAP
             menuButton.action = #selector(SWRevealViewController.revealToggle(_:))
             self.view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
         }
-
-
-        print(selectedFood?.name as String!)
-        //testing.text = self.selectedFood?.name
         
         let APIModel = apiModel()
         
         APIModel.delegate = self
         FullRecipeAPIModel.delegate = self
         FoodInfoAPIModel.delegate = self
+        ImagesAPIModel.delegate = self
+        
+        foodTitle.text = selectedFood.name
+        
+        //Download Images
+        ImagesAPIModel.downloadItems(item: selectedFood.name!)
+        //Download Nutrition facts
+        FoodInfoAPIModel.downloadItems(item: (selectedFood.name!))
+        //Download id of food
         APIModel.downloadItems(postString: postStr!)
     
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidLayoutSubviews(){
+        foodTitle.text = self.selectedFood?.name
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,7 +83,20 @@ class foodDetailViewController: UIViewController, apiModelProtocal, fullRecipeAP
      */
     func itemsDownloadedNutrient(items: NSArray){
         jsonResponseNutrient = items
-        print(jsonResponseNutrient)
+        //print(jsonResponseNutrient)
+        DispatchQueue.main.async {
+           var finalRecipe = ""
+            
+           let brand_name = (self.jsonResponseNutrient[0] as! foodInfoM).brand_name
+           let calories = String((self.jsonResponseNutrient[0] as! foodInfoM).nf_calories)
+           let serving_size_qty = String((self.jsonResponseNutrient[0] as! foodInfoM).nf_serving_size_qty)
+           let serving_size_unit = String((self.jsonResponseNutrient[0] as! foodInfoM).nf_serving_size_unit)
+           let fat = String((self.jsonResponseNutrient[0] as! foodInfoM).nf_total_fat)
+           
+           finalRecipe = "Brand Name: \(String(describing: brand_name!))\nCalories: \(calories)\nServing Size Qty: \(serving_size_qty) \(String(describing: serving_size_unit!))\nFat: \(fat)\n "
+            
+           self.nutritionFacts.text = finalRecipe
+        }
     }
     
     /*
@@ -69,11 +104,27 @@ class foodDetailViewController: UIViewController, apiModelProtocal, fullRecipeAP
      */
     func itemsDownloadedFood(items: NSArray){
         jsonResponseFood = items
-        self.FullRecipeAPIModel.downloadItems(id: (jsonResponseFood[0] as! recipeModel).getId())
-        print((jsonResponseFood[0] as! recipeModel).getTitle())
-        let image = (jsonResponseFood[0] as! recipeModel).getImage()
-        convertToImage(base64: image)
+        //print(jsonResponseFood)
+        
+        DispatchQueue.main.async{
+            var finalRecipe = ""
+             for i in 0 ..< self.jsonResponseFood.count{
+                finalRecipe += (self.jsonResponseFood[i] as! recipeModel).title! + "\n"
+             }
+            //self.recipes.text = finalRecipe
+        }
+        
         //print(image)
+    }
+    
+    /*
+     * Model imagesAPIModel 
+     */
+    func itemsDownloadedImages(items: NSArray) {
+        print("Passed Downloaded Images")
+        jsonResponseImages = items
+        print(jsonResponseImages)
+        self.convertToImage(base64: (self.jsonResponseImages[0] as! imagesModel).uri)
     }
     
     /*
@@ -85,6 +136,7 @@ class foodDetailViewController: UIViewController, apiModelProtocal, fullRecipeAP
         // Creating a session object with the default configuration.
         // You can read more about it here https://developer.apple.com/reference/foundation/urlsessionconfiguration
         let session = URLSession(configuration: .default)
+        var image: UIImage = UIImage()
         
         // Define a download task. The download task will download the contents of the URL as a Data object and then you can do what you wish with that data.
         let downloadPicTask = session.dataTask(with: catPictureURL) { (data, response, error) in
@@ -98,8 +150,7 @@ class foodDetailViewController: UIViewController, apiModelProtocal, fullRecipeAP
                     print("Downloaded cat picture with response code \(res.statusCode)")
                     if let imageData = data {
                         // Finally convert that Data into an image and do what you wish with it.
-                        let image = UIImage(data: imageData)
-                        self.thumbnail_image.image = image
+                        image = UIImage(data: imageData)!
                         // Do something with your image.
                     } else {
                         print("Couldn't get image: Image is nil")
@@ -108,6 +159,10 @@ class foodDetailViewController: UIViewController, apiModelProtocal, fullRecipeAP
                     print("Couldn't get response code for some reason")
                 }
             }
+            DispatchQueue.main.async{
+                self.thumbnail_image.image = image
+            }
+            
         }
         downloadPicTask.resume()
         
@@ -117,19 +172,9 @@ class foodDetailViewController: UIViewController, apiModelProtocal, fullRecipeAP
      * Model: fullRecipeAPIModelProtocal - Function for storing the returned value
      */
     func itemsDownloadedRecipe(items: NSArray){
-        jsonResponseRecipe = items
+        jsonResponseNutrient = items
+        //print(jsonResponseNutrient)
         //print(jsonResponseRecipe)
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

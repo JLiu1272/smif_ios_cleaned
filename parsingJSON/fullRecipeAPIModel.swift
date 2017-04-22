@@ -46,7 +46,7 @@ class fullRecipeAPIModel: NSObject {
                 print("error \(String(describing: error))")
                 return;
             }else{
-                print("Data downloaded")
+                print("Data downloaded Full Recipe")
                 
                 // DEBUGGING: Use for Debugging, prints out what data is
                 /*print("response = \(response!)")
