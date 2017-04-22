@@ -163,9 +163,7 @@ class foodItemViewController: UIViewController, UITableViewDelegate, UITableView
     //to the next
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Set selected location to var
-        print("Feed Item \(feedItems[indexPath.row] as! foodItem)")
         selectFood = feedItems[indexPath.row] as! foodItem
-        print("SelectFood \(selectFood)")
         // Manually call segue to detail view controller
         self.performSegue(withIdentifier: "detailSegue", sender: self)
         
@@ -174,16 +172,14 @@ class foodItemViewController: UIViewController, UITableViewDelegate, UITableView
     override func prepare(for segue: UIStoryboardSegue?, sender: Any?) {
         // Get reference to the destination view controller
         
-        if segue?.identifier == "detailSegue"{
-            let nav = segue!.destination as! UINavigationController
+        if segue?.identifier == "detailSegue" {
             
-            if let detailVC = nav.topViewController as? foodDetailViewController {
-                // Set the property to the selected location so when the view for
-                // detail view controller loads, it can access that property to get the feeditem obj
-                detailVC.selectedFood = foodItem(name: selectFood.name!, status: selectFood.status!, count: selectFood.count!, date_in: selectFood.date_in!, date_left: selectFood.date_left!)
-                detailVC.postStr = self.getAllNames()
-            }
+            let detailViewController = segue?.destination
+                as! foodDetailViewController
+            detailViewController.selectedFood = selectFood
+            detailViewController.postStr = self.getAllNames()
         }
+        
         
     }
 

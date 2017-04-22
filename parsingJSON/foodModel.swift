@@ -44,9 +44,9 @@ class foodModel: NSObject, URLSessionDataDelegate {
                 print("Data downloaded")
                 
                 // DEBUGGING: Use for Debugging, prints out what data is
-                print("response = \(response!)")
+                /*print("response = \(response!)")
                 let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!
-                print("responseString = \(responseString)")
+                print("responseString = \(responseString)")*/
                 
                 self.parseJSON(data: data!)
             }
@@ -109,7 +109,7 @@ class foodModel: NSObject, URLSessionDataDelegate {
                 
                 
             }
-            print(food) 
+            //print(food)
             foods.add(food)
             
         }
