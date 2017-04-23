@@ -179,8 +179,6 @@ class foodItemViewController: UIViewController, UITableViewDelegate, UITableView
             detailViewController.selectedFood = selectFood
             detailViewController.postStr = self.getAllNames()
         }
-        
-        
     }
 
     override func didReceiveMemoryWarning() {

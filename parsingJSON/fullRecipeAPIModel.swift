@@ -87,11 +87,40 @@ class fullRecipeAPIModel: NSObject {
                 let steps = jsonElement["steps"] as? [[String: Any]]
             {
                 recipe.name = name
-                recipe.steps = steps
                 
+                for i in 0 ..< steps.count{
+                    let instr = (steps[i] as NSDictionary)
+                    
+                    /*recipe.equipment.append(instr["equipment"] as! NSDictionary)
+                    recipe.ingredient.append((instr["ingredients"] as! NSArray)[0] as! NSDictionary)
+                    recipe.steps.append((instr["step"] as! NSArray)[0] as! NSDictionary)
+                    */
+                    
+                    let equipArr = (instr["equipment"] as! NSArray)
+                    if(equipArr.count > 0){
+                       recipe.equipment.append((equipArr[0] as! NSDictionary)["name"]! as! String)
+                       //print((equipArr[0] as! NSDictionary)["name"]!)
+                       //print(recipe.equipment[0])
+                    }
+                    let ingreArr = (instr["ingredients"] as! NSArray)
+                    if(ingreArr.count > 0){
+                        print((ingreArr[0] as! NSDictionary)["name"]!)
+                    }
+                    if(ingreArr.count > 0){
+                        recipe.ingredient.append((ingreArr[0] as! NSDictionary)["name"]! as! String)
+                        //print(recipe.ingredient[0])
+                    }
+                    recipe.steps.append(instr["step"] as! String)
+                    
+                    
+                    //recipe.equipment.append((equipArr[0] as! NSDictionary)["step"]! as! String)
+                    //print((recipe.equipment?[i])!)
+                    //print("--------------------------")
+                    
+                }
+                //print(recipe.ingredient)
+                recipes.add(recipe)
             }
-            //print(recipe)
-            recipes.add(recipe)
             
         }
         

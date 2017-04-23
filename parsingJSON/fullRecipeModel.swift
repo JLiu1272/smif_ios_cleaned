@@ -14,43 +14,45 @@ class fullRecipeModel: NSObject {
     
     //properties
     var name: String?
-    var steps: [[String: Any]]?
+    var ingredient: [String] = []
+    var equipment: [String] = []
+    var steps: [String] = []
     
     //Empty Constructor
     override init(){
         
     }
     
-    init(name: String, steps: [[String: Any]])
+    init(name: String, ingredient: [String], equipment: [String], steps: [String])
     {
         
         self.name = name
+        self.ingredient = ingredient
+        self.equipment = equipment
         self.steps = steps
         
     }
     
-    /*
-     * Printing all the steps 
-     */
-    func printSteps() -> String{
-        var fullStr: String = "";
-        for i in 0...((self.steps?.count)!-1)
-        {
-            fullStr += "number: \(String(describing: self.steps?[i]["number"]))\n" +
-                       "step: \(String(describing: self.steps?[i]["step"]))" +
-                       "ingredients: \(String(describing: self.steps?[i]["ingredients"]))" +
-                       "equipment: \(String(describing: self.steps?[i]["equipment"]))"
-        }
-        return fullStr
-    }
-    
-    
     //print object's current state
     override var description: String{
         
-        let steps = printSteps()
-        
-        return "name: \(String(describing: name)), Steps: \(steps)"
+        return "name: \(String(describing: name)), Ingredient: \(String(describing: ingredient))"
+    }
+    
+    func getName() -> String{
+        return name!
+    }
+    
+    func getIngredient() -> [String]{
+        return ingredient
+    }
+    
+    func getEquipment() -> [String]{
+        return equipment
+    }
+    
+    func getSteps() -> [String]{
+        return steps
     }
 
 }

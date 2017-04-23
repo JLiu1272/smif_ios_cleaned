@@ -15,6 +15,7 @@ class recipeListViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var listTableView: UITableView!
     
     var feedItems: NSArray = NSArray()
+    var selectRecipe: recipeModel = recipeModel()
 
     var jsonResponseFood: NSArray = NSArray() //loading values from get Recipe API
     
@@ -114,17 +115,30 @@ class recipeListViewController: UIViewController, UITableViewDelegate, UITableVi
                 self.listTableView.reloadData();
             }
         }
+    }
+    
+    //MARK: Code for when a cell is selected, it will transition
+    //to the next
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Set selected location to var
+        selectRecipe = jsonResponseFood[indexPath.row] as! recipeModel
+        print(selectRecipe)
+        // Manually call segue to detail view controller
+        self.performSegue(withIdentifier: "detailRecSegue", sender: self)
         
-        /*DispatchQueue.main.async{
-            var finalRecipe = ""
-            for i in 0 ..< self.jsonResponseFood.count{
-                finalRecipe += (self.jsonResponseFood[i] as! recipeModel).title! + "\n"
-            }
-            print(finalRecipe)
-            //self.recipes.text = finalRecipe
-        }*/
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue?, sender: Any?) {
+        // Get reference to the destination view controller
         
-        //print(image)
+        if segue?.identifier == "detailRecSegue" {
+            
+            let detailViewController = segue?.destination
+                as! recipeDetailViewController
+            print(self.selectRecipe)
+            detailViewController.selectedRecipe = self.selectRecipe
+
+        }
     }
 
     

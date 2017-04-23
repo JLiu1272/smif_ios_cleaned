@@ -108,6 +108,9 @@ class apiModel: NSObject, URLSessionDataDelegate{
             self.delegate.itemsDownloadedFood(items: recipes)
         });
     }
+    
+ 
+
 
 }
 
