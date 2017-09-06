@@ -18,7 +18,6 @@ class recipeModel: NSObject {
     var image: String?
     var usedIngredientCount: Int?
     var missedIngredientCount: Int?
-    //var image: UIImage?
     
     //Empty Constructor
     override init(){
@@ -27,14 +26,11 @@ class recipeModel: NSObject {
     
     init(id: Int, title: String, image: String?, usedIngredientCount: Int, missedIngredientCount: Int)
     {
-        
         self.id = id
         self.title = title
         self.image = image
         self.usedIngredientCount = usedIngredientCount
         self.missedIngredientCount = missedIngredientCount
-        //self.image = image
-        
     }
     
     //print object's current state

@@ -128,6 +128,8 @@ class loginViewController: UIViewController, UITextFieldDelegate {
                     print(self.isValid)
                 }
                 
+                print("Response String" + (responseString! as String))
+                
                 DispatchQueue.main.async(execute: {
                     if self.checkLogin(data: responseString!) == true {
                         let storyboard = UIStoryboard(name: "food", bundle: nil)

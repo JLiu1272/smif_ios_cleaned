@@ -13,8 +13,7 @@ class foodCell: UITableViewCell {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var count: UILabel!
     @IBOutlet weak var date_left: UILabel!
-    @IBOutlet weak var date_in: UILabel!
-    
+    @IBOutlet var thumbnail_img: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()

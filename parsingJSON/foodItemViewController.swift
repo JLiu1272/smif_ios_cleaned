@@ -15,6 +15,10 @@ class foodItemViewController: UIViewController, UITableViewDelegate, UITableView
     var feedItems: NSArray = NSArray()
     @IBOutlet weak var menu: UIBarButtonItem!
     var selectFood: foodItem = foodItem()
+    var thumb_temp: UIImage = UIImage()
+    
+    //An Array of Images
+    var jsonResponseImages: NSArray = NSArray() //API for grabbing images
     
     //Returns the list of all the names
     var allNames: String = ""
@@ -92,8 +96,56 @@ class foodItemViewController: UIViewController, UITableViewDelegate, UITableView
         
     }
     
-    
-    
+    /*
+     * Converting base64 String into image
+     */
+    func convertToImage(base64: String, cell: UIImageView){
+        let catPictureURL = URL(string: base64)!
+        
+        // Creating a session object with the default configuration.
+        // You can read more about it here https://developer.apple.com/reference/foundation/urlsessionconfiguration
+        let session = URLSession(configuration: .default)
+        var image: UIImage?
+        
+        // Define a download task. The download task will download the contents of the URL as a Data object and then you can do what you wish with that data.
+        let downloadPicTask = session.dataTask(with: catPictureURL) { (data, response, error) in
+            // The download has finished.
+            if let e = error {
+                print("Error downloading cat picture: \(e)")
+            } else {
+                // No errors found.
+                // It would be weird if we didn't have a response, so check for that too.
+                if (response as? HTTPURLResponse) != nil {
+                    //print("Downloaded cat picture with response code \(res.statusCode)")
+                    if let imageData = data {
+                        // Finally convert that Data into an image and do what you wish with it.
+                        image = (UIImage(data: imageData))
+                        self.thumb_temp = image!
+                        // Do something with your image.
+                    } else {
+                        print("Couldn't get image: Image is nil")
+                    }
+                } else {
+                    print("Couldn't get response code for some reason")
+                }
+            }
+            DispatchQueue.main.async{
+                if(image != nil){
+                    cell.image = image
+                }
+                else{
+                    let xScale = UITraitCollection(displayScale: 2.0)   //could be 1.0, 2.0 or 3.0
+                    let image = UIImage(named: "default" )?.imageAsset?.image(with: xScale)
+                    cell.image = image
+                }
+                //self.listTableView.reloadData()
+            }
+            
+        }
+        downloadPicTask.resume()
+        
+    }
+
     /*
      * Converting NSDate to String
      */
@@ -108,9 +160,16 @@ class foodItemViewController: UIViewController, UITableViewDelegate, UITableView
     
     func itemsDownloaded(items: NSArray){
         feedItems = items
+        //print(feedItems)
         if(feedItems.count > 0){
+            for i in 0...(feedItems.count-1)
+            {
+                let item = feedItems[i] as! foodItem
+                _ = item.computeDateLeft(date_in: item.date_in!, date_left: item.date_left!)
+            }
             listTableView.reloadData();
         }
+
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -134,18 +193,32 @@ class foodItemViewController: UIViewController, UITableViewDelegate, UITableView
         //let item: foodItem = feedItems[indexPath.row] as! foodItem
         //Get reference to labels of cell
         myCell.name!.text = item.name
+        let date_in: Date = item.date_in!
+        let date_left: Date = item.date_left!
         myCell.count!.text = String(describing: item.count)
-        myCell.date_in!.text = self.dateformatterDate(date: item.date_in!)
+        
+   
         if(myCell.date_left == nil){
             myCell.date_left!.text = "Date Unavailable"
         }
         else{
-            myCell.date_left!.text = self.dateformatterDate(date: item.date_left!)
+            let date_remain = item.computeDateLeft(date_in: date_in, date_left: date_left)
+            myCell.date_left!.text = date_remain
+            if(date_remain == "0 seconds"){
+                myCell.backgroundColor = UIColor(red: 0x55, green: 0x00, blue: 0x00).withAlphaComponent(0.5)
+            }
+
         }
+        
+        //Convert Image URL to image and set thumbnail image of cell to that
+        //print("Item Image \(item.image)")
+        /*if (item.image != nil){
+            self.convertToImage(base64: (item.image)!, cell: myCell.thumbnail_img)
+        }*/
+
         
         myCell.name!.sizeToFit()
         myCell.count!.sizeToFit()
-        myCell.date_in!.sizeToFit()
         myCell.date_left!.sizeToFit()
         
         

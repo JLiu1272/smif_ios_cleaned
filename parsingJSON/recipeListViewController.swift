@@ -16,6 +16,7 @@ class recipeListViewController: UIViewController, UITableViewDelegate, UITableVi
     
     var feedItems: NSArray = NSArray()
     var selectRecipe: recipeModel = recipeModel()
+    var someInt:Int = 0
 
     var jsonResponseFood: NSArray = NSArray() //loading values from get Recipe API
     
@@ -44,7 +45,6 @@ class recipeListViewController: UIViewController, UITableViewDelegate, UITableVi
         
         self.listTableView.estimatedRowHeight = 255
         self.listTableView.rowHeight = 255
-        self.listTableView.reloadData()
 
 
         // Do any additional setup after loading the view.
@@ -52,21 +52,18 @@ class recipeListViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //Return the number of feed items
-        //print(feedItems)
-        print(jsonResponseFood.count)
         return jsonResponseFood.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         let cellIdentifier: String = "BasicCell"
         let myCell: recipeTableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier)! as! recipeTableViewCell
-        //Get the location to be shown
+        
+        //Generate random numbers
+        let randomNum:UInt32 = arc4random_uniform(17) // range is 0 to 99
+        someInt = Int(randomNum)
     
         let item: recipeModel = jsonResponseFood[indexPath.row] as! recipeModel
-        //Get reference to labels of cell
-        //let new_img: String = convertToImage(base64: item.image!, )
-        //print(new_img)
-        //myCell.thumbnail_image!.image = new_img
         myCell.title!.text = item.title!
         convertToImage(base64: item.image!, imager: myCell.thumbnail_image!)
         myCell.title!.sizeToFit()
