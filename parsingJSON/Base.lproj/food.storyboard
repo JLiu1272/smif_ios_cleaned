@@ -96,6 +96,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Uo9-2k-o49" kind="custom" customClass="SWRevealViewControllerSeguePushController" id="Dvi-Xm-KCI"/>
+                                        </connections>
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
@@ -480,4 +483,7 @@
         <image name="logo" width="750" height="750"/>
         <image name="menu" width="22" height="22"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Dvi-Xm-KCI"/>
+    </inferredMetricsTieBreakers>
 </document>
