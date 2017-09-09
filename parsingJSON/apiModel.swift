@@ -29,13 +29,16 @@ class apiModel: NSObject, URLSessionDataDelegate{
         
         // Set up the URL request
         let mashape: String = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com"
-        let todoEndpoint: String = "\(mashape)/recipes/findByIngredients\(postString)"
+        let url: NSString = NSString(format: "%@/recipes/findByIngredients%@", mashape, postString)
         
-        guard let url = URL(string: todoEndpoint) else {
+        let urlStr : NSString = url.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)! as NSString
+        
+        guard let searchURL : URL = URL(string: urlStr as String) else {
             print("Error: cannot create URL")
             return
         }
-        var request = URLRequest(url: url)
+        
+        var request = URLRequest(url: searchURL)
         request.setValue("TmHuQWpfOLmshXh1sr4jwgjdNPgip12tME5jsnegz7pb7DfqYL", forHTTPHeaderField: "X-Mashape-Key")
         
         //creating a task to send the post request
@@ -50,17 +53,18 @@ class apiModel: NSObject, URLSessionDataDelegate{
                 print("Data downloaded API")
                 
                 // DEBUGGING: Use for Debugging, prints out what data is
-                /*print("response = \(response!)")
-                 let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!
-                 print("responseString = \(responseString)")*/
-                
+                print("response = \(response!)")
+                let responseString = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)!
+                print("responseString = \(responseString)")
                 self.parseJSONFood(data: data!)
+                
             }
             
         }
         
         //executing the task
         task.resume()
+    
     }
     
     
